@@ -1,0 +1,58 @@
+<div class="mb-4 h2 text-success">
+    Sign up
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<div class="mb-3">
+    <input class="form-control bg-body-secondary" 
+    placeholder="Full Name" formControlName="fullName">
+    <div class="error-feedback" 
+    *ngIf="hasDislayableError('fullName') && form.
+    controls.fullName.hasError('required')">
+        Please enter your full name.
+    </div>
+</div>
+<div class="mb-3">
+    <input class="form-control bg-body-secondary" placeholder="Email" 
+    formControlName="email">
+    <div class="error-feedback" *ngIf="hasDislayableError('email')">
+        <div *ngIf="form.controls.email.hasError('required')">
+            Please enter your email address.
+        </div>
+        <div *ngIf="form.controls.email.hasError('email')">
+            Please enter a valid email address.
+        </div>
+    </div>
+</div>
+<div class="mb-3">
+    <input class="form-control bg-body-secondary" placeholder="Password" 
+    formControlName="password">
+    <div class="error-feedback" *ngIf="hasDislayableError('password')">
+        <ng-container [ngSwitch]="form.controls.password.errors | firstKey">
+            <div *ngSwitchCase="'required'">
+                Please enter your password.
+            </div>
+            <div *ngSwitchCase="'minlength'">
+                Atleast 6 charecters required.
+            </div>
+            <div *ngSwitchCase="'pattern'">
+                One or more special charecter(s).
+            </div>
+        </ng-container>
+    </div>
+</div>
+<div class="mb-3">
+    <input class="form-control bg-body-secondary" placeholder="Confirm Password" 
+    formControlName="confirmPassword">
+    <div class="error-feedback" 
+    *ngIf="hasDislayableError('confirmPassword') && form.
+    controls.fullName.hasError
+    ('passwordMismatch')">
+        Password does not match.
+    </div>
+</div>
+<div class="mt-4">
+    <button type="submit" class="btn btn-success w-100 rounded-3">
+        Register
+    </button>
+</div>
+</form>
